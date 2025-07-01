@@ -4,12 +4,12 @@ import AuthPage from "./pages/AuthPage"
 import CompanyPage from "./pages/CompanyPage"
 import MySubscribtionsPage from "./pages/MySubscribtionsPage"
 import NavBar from "./components/NavBar"
+import "./index.css"
 
 function App() {
 
   return (
     <>
-      <h1>Hello React</h1>
       <NavBar />
       <Routes>
         <Route index element={<PlansPage />} />
