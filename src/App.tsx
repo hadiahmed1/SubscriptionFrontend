@@ -1,8 +1,20 @@
+import { Route, Routes } from "react-router"
+import PlansPage from "./pages/PlansPage"
+import AuthPage from "./pages/AuthPage"
+import CompanyPage from "./pages/CompanyPage"
+import MySubscribtionsPage from "./pages/MySubscribtionsPage"
+
 function App() {
 
   return (
     <>
       <h1>Hello React</h1>
+      <Routes>
+        <Route index element={<PlansPage />} />
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/company" element={<CompanyPage />} />
+        <Route path="/mysubscriptions" element={<MySubscribtionsPage />} />
+      </Routes>
     </>
   )
 }
