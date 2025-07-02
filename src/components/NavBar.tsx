@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import LoginIcon from '@mui/icons-material/Login';
 import { useNavigate } from 'react-router';
 
 const pages = [{ name: 'Plans', path: '/' }, { name: 'Companies', path: '/company' }, { name: 'MySubscriptions', path: '/mysubscriptions' }];
@@ -76,7 +77,7 @@ const NavBar = () => {
                             sx={{ display: { xs: 'block', md: 'none' } }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page.name} onClick={()=>{handleCloseNavMenu();navigate(page.path)}}>
+                                <MenuItem key={page.name} onClick={() => { handleCloseNavMenu(); navigate(page.path) }}>
                                     <Typography sx={{ textAlign: 'center' }}>{page.name}</Typography>
                                 </MenuItem>
                             ))}
@@ -105,13 +106,30 @@ const NavBar = () => {
                         {pages.map((page) => (
                             <Button
                                 key={page.name}
-                                onClick={() => { handleCloseNavMenu();navigate(page.path) }}
+                                onClick={() => { handleCloseNavMenu(); navigate(page.path) }}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 {page.name}
                             </Button>
                         ))}
                     </Box>
+
+                    <Button
+                    onClick={()=>navigate('/signin')}
+                        variant="outlined"
+                        sx={{
+                            color: 'white',
+                            borderColor: 'white',
+                            '&:hover': {
+                                backgroundColor: 'white',
+                                color: 'black',
+                                borderColor: 'white',
+                            },
+                        }}
+                    >
+                        <LoginIcon sx={{ color: 'inherit', mr: 1 }} />
+                        <b>Login</b>
+                    </Button>
                 </Toolbar>
             </Container>
         </AppBar>
