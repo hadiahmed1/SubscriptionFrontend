@@ -8,12 +8,9 @@ import {
   Link,
   Paper,
 } from '@mui/material';
-
-
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useForm } from 'react-hook-form';
 import api from '../utils/axiosInstace';
-
 
 const signIn = async (data: SignInData) => {
   try {
