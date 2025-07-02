@@ -22,7 +22,7 @@ const PlanCard = ({ plan }: { plan: Plan }) => {
                 sx={{
                     display: 'flex',
                     flexDirection: { xs: 'column', sm: 'row' }, // column on small, row on medium+
-                    justifyContent:'space-evenly'
+                    justifyContent:'space-around'
                 }}
             >
                 {/* Left side: PlanDetails */}
@@ -38,7 +38,7 @@ const PlanCard = ({ plan }: { plan: Plan }) => {
                     <CardActions
                         sx={{
                             flexDirection: 'column',
-                            justifyContent: 'space-evenly',
+                            justifyContent: 'space-around',
                             height: '100%',               // make CardActions fill parent Box height
                         }}
                     >
