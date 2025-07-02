@@ -1,4 +1,4 @@
-import { CardActions, Button, Collapse, Card } from "@mui/material"
+import { CardActions, Button, Collapse, Card, Box } from "@mui/material"
 import { useState } from "react";
 import type { Plan } from "../types/plan.type";
 import FeatureList from "./FeatureList";
@@ -18,25 +18,47 @@ const PlanCard = ({ plan }: { plan: Plan }) => {
     };
     return (
         <Card key={plan.id} variant="outlined">
-            <PlanDeatils plan={plan} />
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: { xs: 'column', sm: 'row' }, // column on small, row on medium+
+                    justifyContent:'space-evenly'
+                }}
+            >
+                {/* Left side: PlanDetails */}
+                <Box sx={{ p: 2 }}>
+                    <PlanDeatils plan={plan} />
+                    <Collapse in={expandedPlanId === plan.id} timeout="auto" unmountOnExit>
+                        <FeatureList features={plan.features} />
+                    </Collapse>
+                </Box>
 
-            <CardActions>
-                <Button size="small" onClick={() => toggleFeatures(plan.id)}>
-                    {expandedPlanId === plan.id ? 'Hide Features' : 'View Features'}
-                </Button>
-                <Button
-                    size="small"
-                    variant="contained"
-                    onClick={() => onSubscribe?.(plan.id)}
-                >
-                    Subscribe
-                </Button>
-            </CardActions>
+                {/* Right side: Buttons + Features */}
+                <Box sx={{ p: 2 }}>
+                    <CardActions
+                        sx={{
+                            flexDirection: 'column',
+                            justifyContent: 'space-evenly',
+                            height: '100%',               // make CardActions fill parent Box height
+                        }}
+                    >
+                        <Button
+                            size="small"
+                            variant="contained"
+                            onClick={() => onSubscribe?.(plan.id)}
+                        >
+                            Subscribe
+                        </Button>
+                        <Button size="small" onClick={() => toggleFeatures(plan.id)}>
+                            {expandedPlanId === plan.id ? 'Hide Features' : 'View Features'}
+                        </Button>
+                    </CardActions>
+                </Box>
 
-            <Collapse in={expandedPlanId === plan.id} timeout="auto" unmountOnExit>
-                <FeatureList features={plan.features} />
-            </Collapse>
+            </Box>
+
         </Card>
+
     )
 }
 
