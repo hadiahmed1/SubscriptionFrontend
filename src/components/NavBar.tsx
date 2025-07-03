@@ -10,12 +10,15 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import LoginIcon from '@mui/icons-material/Login';
 import { useNavigate } from 'react-router';
+import useUser from '../hooks/useUser';
+import SignInBtn from './SignInBtn';
+import LogoutBtn from './LogoutBtn';
 
 const pages = [{ name: 'Plans', path: '/' }, { name: 'Companies', path: '/company' }, { name: 'MySubscriptions', path: '/mysubscriptions' }];
 
 const NavBar = () => {
+    const { user } = useUser();
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -113,23 +116,8 @@ const NavBar = () => {
                             </Button>
                         ))}
                     </Box>
+                    {!user ? <SignInBtn /> : <LogoutBtn />}
 
-                    <Button
-                    onClick={()=>navigate('/signin')}
-                        variant="outlined"
-                        sx={{
-                            color: 'white',
-                            borderColor: 'white',
-                            '&:hover': {
-                                backgroundColor: 'white',
-                                color: 'black',
-                                borderColor: 'white',
-                            },
-                        }}
-                    >
-                        <LoginIcon sx={{ color: 'inherit', mr: 1 }} />
-                        <b>Login</b>
-                    </Button>
                 </Toolbar>
             </Container>
         </AppBar>
