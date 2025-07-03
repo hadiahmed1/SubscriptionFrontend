@@ -14,6 +14,7 @@ const CompanyFeatureList = () => {
         const getPlans = async () => {
             setLoading(true)
             try {
+                if(!user?.id) return;
                 const res = await api.get<Feature[]>(`feature/${user?.id}`);
                 setFeatures(res.data);
             } catch (error) {
