@@ -10,6 +10,7 @@ import type { User } from "./types/user.type"
 import { useEffect, useState } from "react"
 import UserContext from "./contexts/UserContext"
 import api from "./utils/axiosInstace"
+import { Box } from "@mui/material"
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -18,7 +19,7 @@ function App() {
       try {
         const res = await api.get('users/me');
         console.log(res);
-        setUser(res.data|| null);
+        setUser(res.data || null);
       } catch (error) {
         console.log(error);
       }
@@ -29,15 +30,25 @@ function App() {
   return (
     <>
       <UserContext.Provider value={{ user, setUser }}>
-        <NavBar />
-        <Routes>
-          <Route index element={<PlansPage />} />
-          <Route path="signin" element={<SignInForm />} />
-          <Route path="signup" element={<SignUpForm />} />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100vh', // Full screen height
+          }}
+        >
+          <NavBar />
+          <Box sx={{ flex: 1, overflow: 'auto' }}>
+            <Routes>
+              <Route index element={<PlansPage />} />
+              <Route path="signin" element={<SignInForm />} />
+              <Route path="signup" element={<SignUpForm />} />
 
-          <Route path="/company" element={<CompanyPage />} />
-          <Route path="/mysubscriptions" element={<MySubscribtionsPage />} />
-        </Routes>
+              <Route path="/company" element={<CompanyPage />} />
+              <Route path="/mysubscriptions" element={<MySubscribtionsPage />} />
+            </Routes>
+          </Box>
+        </Box>
       </UserContext.Provider>
     </>
   )
