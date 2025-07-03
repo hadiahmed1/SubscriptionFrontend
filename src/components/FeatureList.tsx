@@ -1,12 +1,9 @@
-import { CardContent, Typography, List, ListItem, ListItemText } from "@mui/material"
+import { CardContent, List, ListItem, ListItemText } from "@mui/material"
 import type { Feature } from "../types/feature.type";
 
 const FeatureList = ({ features }: { features: Feature[] }) => {
     return (
         <CardContent>
-            <Typography variant="subtitle2" gutterBottom>
-                Features:
-            </Typography>
             <List dense>
                 {features.map((feature) => (
                     <span key={feature.id}>
