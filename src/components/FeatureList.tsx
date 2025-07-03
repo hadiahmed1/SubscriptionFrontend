@@ -1,7 +1,7 @@
 import { CardContent, Typography, List, ListItem, ListItemText } from "@mui/material"
-import type { PlanFeature } from "../types/feature.type";
+import type { Feature } from "../types/feature.type";
 
-const FeatureList = ({ features }: { features: PlanFeature[] }) => {
+const FeatureList = ({ features }: { features: Feature[] }) => {
     return (
         <CardContent>
             <Typography variant="subtitle2" gutterBottom>
@@ -9,11 +9,11 @@ const FeatureList = ({ features }: { features: PlanFeature[] }) => {
             </Typography>
             <List dense>
                 {features.map((feature) => (
-                    <span key={feature.featureId}>
+                    <span key={feature.id}>
                         <ListItem >
                             <ListItemText
-                                primary={feature.feature.name}
-                                secondary={feature.feature.description}
+                                primary={feature.name}
+                                secondary={feature.description}
                             />
                         </ListItem>
                     </span>
