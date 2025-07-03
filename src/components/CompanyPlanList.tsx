@@ -30,7 +30,7 @@ const CompanyPlanList = () => {
     }, [error])
 
     return (<>
-        {loading ? <CircularProgress size={40} /> : plans.map(plan => <PlanCard plan={plan} />)}
+        {loading ? <CircularProgress size={40} /> : plans.map(plan => <PlanCard key={plan.id} plan={plan} />)}
 
     </>)
 }
