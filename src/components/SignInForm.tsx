@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useForm } from 'react-hook-form';
 import api from '../utils/axiosInstace';
 import useUser from '../hooks/useUser';
+import { useNavigate } from 'react-router';
 
 
 type SignInData = {
@@ -21,11 +22,13 @@ type SignInData = {
 
 const SignInForm = () => {
   const { setUser } = useUser();
+  const navigate = useNavigate();
   const signIn = async (data: SignInData) => {
     try {
       const res = await api.post('/auth/token', data);
       console.log(res.data);
       setUser(res.data.user);
+      navigate('/')
     } catch (error) {
       console.log(error);
     }
