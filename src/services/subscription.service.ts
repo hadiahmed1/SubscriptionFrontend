@@ -2,9 +2,9 @@ import axios from "axios";
 import api from "../utils/axiosInstace";
 import type { Subscription } from "../types/subsctiption";
 
-export const suscribe = async (planId: string) => {
+export const suscribeToPlan = async (planId: string) => {
     try {
-        const res = await api.post<unknown[]>(`/subscription/${planId}`);
+        const res = await api.post(`/subscription/${planId}`);
         return res.data;
     } catch (error) {
         if (axios.isAxiosError(error))

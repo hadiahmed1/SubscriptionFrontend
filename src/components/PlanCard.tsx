@@ -3,10 +3,7 @@ import { useState } from "react";
 import type { Plan } from "../types/plan.type";
 import FeatureList from "./FeatureList";
 import PlanDeatils from "./PlanDetails";
-
-const onSubscribe = (planId: string) => {
-    console.log("Suscrive" + planId);
-}
+import { suscribeToPlan } from "../services/subscription.service";
 
 type Props = {
     plan: Plan; expiresOn?: string
@@ -57,7 +54,7 @@ const PlanCard = ({ plan, expiresOn }: Props) => {
                             <Button
                                 size="small"
                                 variant="contained"
-                                onClick={() => onSubscribe(plan.id)}
+                                onClick={() => suscribeToPlan(plan.id)}
                             >
                                 Subscribe
                             </Button>
