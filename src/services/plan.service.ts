@@ -14,3 +14,16 @@ export const fetchAllPlans = async (): Promise<Plan[]> => {
         throw error;
     }
 };
+
+export const fetchCompanyPlans = async (): Promise<Plan[]> => {
+    try {
+        const res = await api.get<Plan[]>('/plan/company');
+        return res.data;
+    } catch (error) {
+        if (axios.isAxiosError(error))
+            console.error("Axios error:", error.response?.data || error.message);
+        else
+            console.error("Unexpected error:", error);
+        throw error;
+    }
+};
