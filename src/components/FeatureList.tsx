@@ -3,7 +3,7 @@ import type { Feature } from "../types/feature.type";
 
 const FeatureList = ({ features }: { features: Feature[] }) => {
     return (
-        <CardContent>
+        <CardContent sx={{px:3}}>
             <List dense>
                 {features.map((feature) => (
                     <span key={feature.id}>
