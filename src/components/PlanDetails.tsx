@@ -8,6 +8,9 @@ const PlanDeatils = ({ plan }: { plan: Plan }) => {
                 {plan.name} — by {plan.company.username}
             </Typography>
             <Typography variant="body2" color="text.secondary">
+                {"Valid for: "+plan.validity+" Days"}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
                 {plan.description}
             </Typography>
             <Typography variant="subtitle1" mt={1}>

@@ -8,5 +8,6 @@ export type Plan = {
     cost: number;
     discount: number;
     company: Company;
+    validity:number;
     features: PlanFeature[];
 };
