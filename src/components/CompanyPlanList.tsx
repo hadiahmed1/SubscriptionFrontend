@@ -25,8 +25,8 @@ const CompanyPlanList = () => {
         getPlans();
     }, []);
     useEffect(() => {
-        console.log(error);
-
+        if (error)
+            console.log(error);
     }, [error])
 
     return (<>

@@ -14,8 +14,8 @@ const CompanyFeatureList = () => {
         const getPlans = async () => {
             setLoading(true)
             try {
-                if(!user?.id) return;
-                const res = await api.get<Feature[]>(`feature/${user?.id}`);
+                if (!user?.id) return;
+                const res = await api.get(`feature/${user?.id}`);
                 setFeatures(res.data);
             } catch (error) {
                 setError("Failed to fetch features:" + error);
@@ -27,12 +27,13 @@ const CompanyFeatureList = () => {
         getPlans();
     }, [user?.id]);
     useEffect(() => {
-        console.log(error);
+        if (error)
+            console.log(error);
     }, [error])
 
     return (<>
         {
-            loading ? <CircularProgress size={40} /> : <FeatureList features={ features} />
+            loading ? <CircularProgress size={40} /> : <FeatureList features={features} />
         }
     </>)
 }
