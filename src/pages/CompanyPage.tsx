@@ -1,5 +1,9 @@
-const CompanyPage=()=>{
-    return(<>CompanyPage</>)
+import CompanyPlanList from "../components/CompanyPlanList";
+
+const CompanyPage = () => {
+    return (<>
+        <CompanyPlanList />
+    </>)
 }
 
 export default CompanyPage;
