@@ -12,6 +12,7 @@ import UserContext from "./contexts/UserContext"
 import api from "./utils/axiosInstace"
 import { Box } from "@mui/material"
 import AddFeatureForm from "./components/AddFeatureForm"
+import AddPlanForm from "./components/AddPlanForm"
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -22,7 +23,7 @@ function App() {
         console.log(res);
         setUser(res.data || null);
       } catch (error) {
-        console.log(error);
+          console.log(error);
       }
     }
     fetchUser();
@@ -44,9 +45,9 @@ function App() {
               <Route index element={<PlansPage />} />
               <Route path="signin" element={<SignInForm />} />
               <Route path="signup" element={<SignUpForm />} />
-
               <Route path="/company" element={<CompanyPage />} />
               <Route path="/company/addfeature" element={<AddFeatureForm />} />
+              <Route path="/company/addplan" element={<AddPlanForm />} />
               <Route path="/mysubscriptions" element={<MySubscribtionsPage />} />
             </Routes>
           </Box>
