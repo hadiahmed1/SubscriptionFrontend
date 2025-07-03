@@ -11,6 +11,7 @@ import { useEffect, useState } from "react"
 import UserContext from "./contexts/UserContext"
 import api from "./utils/axiosInstace"
 import { Box } from "@mui/material"
+import AddFeatureForm from "./components/AddFeatureForm"
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -45,6 +46,7 @@ function App() {
               <Route path="signup" element={<SignUpForm />} />
 
               <Route path="/company" element={<CompanyPage />} />
+              <Route path="/company/addfeature" element={<AddFeatureForm />} />
               <Route path="/mysubscriptions" element={<MySubscribtionsPage />} />
             </Routes>
           </Box>
