@@ -11,17 +11,8 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useForm } from 'react-hook-form';
 import api from '../utils/axiosInstace';
+import useUser from '../hooks/useUser';
 
-const signIn = async (data: SignInData) => {
-  try {
-    const res = await api.post('/auth/token', data);
-    console.log(res.data);
-
-  } catch (error) {
-    console.log(error);
-  }
-  return;
-};
 
 type SignInData = {
   username: string;
@@ -29,6 +20,17 @@ type SignInData = {
 };
 
 const SignInForm = () => {
+  const { setUser } = useUser();
+  const signIn = async (data: SignInData) => {
+    try {
+      const res = await api.post('/auth/token', data);
+      console.log(res.data);
+      setUser(res.data.user);
+    } catch (error) {
+      console.log(error);
+    }
+    return;
+  };
   const {
     register,
     handleSubmit,
