@@ -4,6 +4,7 @@ import type { Plan } from "../types/plan.type";
 import FeatureList from "./FeatureList";
 import PlanDeatils from "./PlanDetails";
 import { suscribeToPlan } from "../services/subscription.service";
+import type { Feature } from "../types/feature.type";
 
 type Props = {
     plan: Plan; expiresOn?: string
@@ -12,7 +13,7 @@ type Props = {
 const PlanCard = ({ plan, expiresOn }: Props) => {
 
     const [expandedPlanId, setExpandedPlanId] = useState<string | null>(null);
-
+    const features: Feature[] = plan.features.map(planFeature => planFeature.feature)
     const toggleFeatures = (planId: string) => {
         setExpandedPlanId((prev) => (prev === planId ? null : planId));
     };
@@ -26,15 +27,15 @@ const PlanCard = ({ plan, expiresOn }: Props) => {
                 }}
             >
                 {/* Left side: PlanDetails */}
-                <Box sx={{ p: 2 }}>
+                <Box>
                     <PlanDeatils plan={plan} />
                     <Collapse in={expandedPlanId === plan.id} timeout="auto" unmountOnExit>
-                        <FeatureList features={plan.features} />
+                        <FeatureList features={features} />
                     </Collapse>
                 </Box>
 
                 {/* Right side: Buttons + Features */}
-                <Box sx={{ p: 2 }}>
+                <Box>
                     <CardActions
                         sx={{
                             flexDirection: 'column',
