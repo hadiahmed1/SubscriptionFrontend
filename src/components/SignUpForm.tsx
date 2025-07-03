@@ -7,6 +7,7 @@ import {
   Avatar,
   Link,
   Paper,
+  MenuItem,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useForm } from 'react-hook-form';
@@ -16,7 +17,6 @@ const signUp = async (data: SignUpData) => {
   try {
     const res = await api.post('/users', data);
     console.log(res.data);
-
   } catch (error) {
     console.log(error);
   }
@@ -27,6 +27,7 @@ type SignUpData = {
   username: string;
   email: string;
   password: string;
+   role: 'USER' | 'COMPANY';
 };
 
 const SignUpForm = () => {
@@ -83,6 +84,18 @@ const SignUpForm = () => {
               error={!!errors.password}
               helperText={errors.password?.message}
             />
+
+            <TextField
+              select
+              label="Role"
+              fullWidth
+              margin="normal"
+              defaultValue="USER"
+              {...register('role', { required: true })}
+            >
+              <MenuItem value="USER">User</MenuItem>
+              <MenuItem value="COMPANY">Company</MenuItem>
+            </TextField>
 
             <Button
               type="submit"
