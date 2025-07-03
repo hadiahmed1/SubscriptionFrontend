@@ -22,7 +22,7 @@ const PlanCard = ({ plan, expiresOn }: Props) => {
             <Box
                 sx={{
                     display: 'flex',
-                    flexDirection: { xs: 'column', sm: 'row' }, // column on small, row on medium+
+                    flexDirection: { xs: 'column', sm: 'row' }, 
                     justifyContent: 'space-around'
                 }}
             >
@@ -40,7 +40,7 @@ const PlanCard = ({ plan, expiresOn }: Props) => {
                         sx={{
                             flexDirection: 'column',
                             justifyContent: 'space-around',
-                            height: '100%',               // make CardActions fill parent Box height
+                            height: '100%',    
                         }}
                     >
                         {expiresOn ? (

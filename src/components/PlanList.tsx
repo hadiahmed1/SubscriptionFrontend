@@ -1,4 +1,3 @@
-// src/components/PlanList.tsx
 import {
   Box,
 } from '@mui/material';

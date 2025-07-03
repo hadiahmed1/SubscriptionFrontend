@@ -36,7 +36,7 @@ function App() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            height: '100vh', // Full screen height
+            height: '100vh'
           }}
         >
           <NavBar />
