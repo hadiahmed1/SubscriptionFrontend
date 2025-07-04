@@ -15,6 +15,7 @@ import AddFeatureForm from "./components/AddFeatureForm"
 import AddPlanForm from "./components/AddPlanForm"
 import ProtectedRoute from "./components/ProtectedRoute"
 import ProtectedCompanyRoute from "./components/ProtectedCompanyRoute"
+import { ToastContainer, toast} from 'react-toastify';
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -25,6 +26,7 @@ function App() {
         console.log(res);
         setUser(res.data || null);
       } catch (error) {
+        toast.warn("You're Logged out. Please Login")
         console.log(error);
       }
     }
@@ -57,6 +59,7 @@ function App() {
               </Route>
             </Routes>
           </Box>
+          <ToastContainer />
         </Box>
       </UserContext.Provider>
     </>
