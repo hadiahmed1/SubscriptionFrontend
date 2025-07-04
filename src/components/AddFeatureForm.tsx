@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import api from '../utils/axiosInstace';
+import { useNavigate } from 'react-router';
 
 type AddFeatureFormData = {
   name: string;
@@ -21,12 +22,13 @@ const AddFeatureForm = () => {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<AddFeatureFormData>();
-
+  const navigate = useNavigate();
   const onSubmit = async (data: AddFeatureFormData) => {
     try {
       const res = await api.post('/feature', data);
       console.log('Feature created:', res.data);
-      reset(); 
+      reset();
+      navigate(-1)
     } catch (error) {
       console.error('Failed to create feature:', error);
     }

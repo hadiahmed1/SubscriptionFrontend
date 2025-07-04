@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import api from '../utils/axiosInstace';
 import  useUser  from '../hooks/useUser';  
+import { useNavigate } from 'react-router';
 
 type Feature = {
   id: string;
@@ -34,7 +35,7 @@ const AddPlanForm = () => {
   const { user } = useUser();
   const [features, setFeatures] = useState<Feature[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -65,6 +66,7 @@ const AddPlanForm = () => {
   const onSubmit = async (data: PlanFormData) => {
     try {
       const res = await api.post('/plan', data);
+      navigate(-1)
       console.log('Plan created:', res.data);
       reset();
     } catch (error) {
