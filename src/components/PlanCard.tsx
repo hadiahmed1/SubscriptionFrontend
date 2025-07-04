@@ -3,8 +3,8 @@ import { useState } from "react";
 import type { Plan } from "../types/plan.type";
 import FeatureList from "./FeatureList";
 import PlanDeatils from "./PlanDetails";
-import { suscribeToPlan } from "../services/subscription.service";
 import type { Feature } from "../types/feature.type";
+import PayBtn from "./PayBtn";
 
 type Props = {
     plan: Plan; expiresOn?: string
@@ -22,7 +22,7 @@ const PlanCard = ({ plan, expiresOn }: Props) => {
             <Box
                 sx={{
                     display: 'flex',
-                    flexDirection: { xs: 'column', sm: 'row' }, 
+                    flexDirection: { xs: 'column', sm: 'row' },
                     justifyContent: 'space-around'
                 }}
             >
@@ -40,10 +40,11 @@ const PlanCard = ({ plan, expiresOn }: Props) => {
                         sx={{
                             flexDirection: 'column',
                             justifyContent: 'space-around',
-                            height: '100%',    
+                            height: '100%',
                         }}
                     >
                         {expiresOn ? (
+                            // expiry date
                             <Typography variant="body2" sx={{ fontWeight: 500 }}>
                                 Expires on: {new Date(expiresOn).toLocaleDateString(undefined, {
                                     year: "numeric",
@@ -52,24 +53,16 @@ const PlanCard = ({ plan, expiresOn }: Props) => {
                                 })}
                             </Typography>
                         ) : (
-                            <Button
-                                size="small"
-                                variant="contained"
-                                onClick={() => suscribeToPlan(plan.id)}
-                            >
-                                Subscribe
-                            </Button>
+                            <PayBtn planId={plan.id} />
                         )}
+                        {/* Toggle Plan Features Visibility */}
                         <Button size="small" onClick={() => toggleFeatures(plan.id)}>
                             {expandedPlanId === plan.id ? 'Hide Features' : 'View Features'}
                         </Button>
                     </CardActions>
                 </Box>
-
             </Box>
-
         </Card>
-
     )
 }
 
