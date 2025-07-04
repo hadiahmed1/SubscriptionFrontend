@@ -24,9 +24,9 @@ const AddFeatureForm = () => {
 
   const onSubmit = async (data: AddFeatureFormData) => {
     try {
-      const res = await api.post('/feature', data); // Update the endpoint as needed
+      const res = await api.post('/feature', data);
       console.log('Feature created:', res.data);
-      reset(); // clear the form
+      reset(); 
     } catch (error) {
       console.error('Failed to create feature:', error);
     }
