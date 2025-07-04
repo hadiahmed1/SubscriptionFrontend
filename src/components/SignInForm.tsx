@@ -13,6 +13,7 @@ import { useForm } from 'react-hook-form';
 import api from '../utils/axiosInstace';
 import useUser from '../hooks/useUser';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 
 type SignInData = {
@@ -26,10 +27,11 @@ const SignInForm = () => {
   const signIn = async (data: SignInData) => {
     try {
       const res = await api.post('/auth/token', data);
-      console.log(res.data);
       setUser(res.data.user);
+      toast.success("Signin successfull")
       navigate('/')
     } catch (error) {
+      toast.error("Couldn't signin")
       console.log(error);
     }
     return;

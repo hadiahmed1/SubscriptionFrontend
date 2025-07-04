@@ -9,6 +9,7 @@ import {
 import { useForm } from 'react-hook-form';
 import api from '../utils/axiosInstace';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 type AddFeatureFormData = {
   name: string;
@@ -25,11 +26,12 @@ const AddFeatureForm = () => {
   const navigate = useNavigate();
   const onSubmit = async (data: AddFeatureFormData) => {
     try {
-      const res = await api.post('/feature', data);
-      console.log('Feature created:', res.data);
+      await api.post('/feature', data);
+      toast.success("Feature Created Sucessfully")
       reset();
       navigate(-1)
     } catch (error) {
+      toast.error('Failed to create feature')
       console.error('Failed to create feature:', error);
     }
   };

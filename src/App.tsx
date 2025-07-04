@@ -23,7 +23,6 @@ function App() {
     const fetchUser = async () => {
       try {
         const res = await api.get('users/me');
-        console.log(res);
         setUser(res.data || null);
       } catch (error) {
         toast.warn("You're Logged out. Please Login")

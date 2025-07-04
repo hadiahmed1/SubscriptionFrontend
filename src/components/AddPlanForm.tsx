@@ -15,6 +15,7 @@ import { useForm, Controller } from 'react-hook-form';
 import api from '../utils/axiosInstace';
 import  useUser  from '../hooks/useUser';  
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 type Feature = {
   id: string;
@@ -68,8 +69,10 @@ const AddPlanForm = () => {
       const res = await api.post('/plan', data);
       navigate(-1)
       console.log('Plan created:', res.data);
+      toast.success("Plan Created Successfully");
       reset();
     } catch (error) {
+      toast.error("Couldn't create plan. Try again Later")
       console.error('Error creating plan:', error);
     }
   };

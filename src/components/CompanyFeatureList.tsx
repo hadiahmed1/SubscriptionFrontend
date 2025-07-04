@@ -4,6 +4,7 @@ import type { Feature } from "../types/feature.type";
 import api from "../utils/axiosInstace";
 import useUser from "../hooks/useUser";
 import FeatureList from "./FeatureList";
+import { toast } from "react-toastify";
 
 const CompanyFeatureList = () => {
     const [features, setFeatures] = useState<Feature[]>([]);
@@ -18,6 +19,7 @@ const CompanyFeatureList = () => {
                 const res = await api.get(`feature/${user?.id}`);
                 setFeatures(res.data);
             } catch (error) {
+                toast.error("Failed to fetch features")
                 setError("Failed to fetch features:" + error);
             } finally {
                 setLoading(false);

@@ -12,13 +12,15 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useForm } from 'react-hook-form';
 import api from '../utils/axiosInstace';
+import { toast } from 'react-toastify';
 
 const signUp = async (data: SignUpData) => {
   try {
-    const res = await api.post('/users', data);
-    console.log(res.data);
+    await api.post('/users', data);
+    toast.success("User created successfully")
   } catch (error) {
     console.log(error);
+    toast.error("Couldn't create user. Try again latter")
   }
   return;
 };

@@ -3,6 +3,7 @@ import { Button } from '@mui/material';
 import { useNavigate } from 'react-router';
 import api from '../utils/axiosInstace';
 import useUser from '../hooks/useUser';
+import { toast } from 'react-toastify';
 
 
 const LogoutBtn = () => {
@@ -10,10 +11,11 @@ const LogoutBtn = () => {
     const { setUser } = useUser();
     const logout = async () => {
         try {
-            const res = await api.post('/auth/logout');
-            console.log(res.data);
+            await api.post('/auth/logout');
+            toast.success("Logout successful")
             setUser(null);
         } catch (error) {
+            toast.error("Couldn't Logout")
             console.log(error);
         }
         return;

@@ -2,12 +2,21 @@ import { Button } from "@mui/material"
 import api from "../utils/axiosInstace";
 import { useRazorpay, type RazorpayOrderOptions } from "react-razorpay";
 import type { razorpayResponse } from "../types/razorpayResponse";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const PayBtn = ({ planId }: { planId: string }) => {
+    const navigate=useNavigate();
     const { isLoading, Razorpay } = useRazorpay();
     const verifyOrder = async (data: razorpayResponse) => {
-        const res = await api.post('/order/verify', data);
-        console.log(res.data)
+        try {
+            await api.post('/order/verify', data);
+            toast.success("Susbscription created successfully");
+            navigate('mysubscriptions')
+        } catch (error) {
+            console.log(error);
+            toast.error("Subscription couldn't be created: Contact administrator")
+        }
     }
 
     const makeOrder = async () => {
@@ -23,9 +32,8 @@ const PayBtn = ({ planId }: { planId: string }) => {
             order_id: order.order_id,
 
             handler: (response) => {
-                console.log("PAYMENT RES:>>", response);
                 verifyOrder(response)
-                alert("Payment Successful!");
+                toast.success("Payment Successful!");
             },
             prefill: {
                 name: "John Doe",
