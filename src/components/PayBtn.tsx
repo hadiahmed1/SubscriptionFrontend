@@ -24,8 +24,8 @@ const PayBtn = ({ planId }: { planId: string }) => {
         const order = res.data;
 
         const options: RazorpayOrderOptions = {
-            key: "rzp_test_hOW0s7mspGJF2F",
-            amount: order.amount * 100,
+            key: import.meta.env.VITE_RAZORPAY_KEY,
+            amount: order.amount,
             currency: "INR",
             name: "HADI AHMED",
             description: `Transaction for Plan ${planId}`,
