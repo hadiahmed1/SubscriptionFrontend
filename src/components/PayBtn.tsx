@@ -4,10 +4,12 @@ import { useRazorpay, type RazorpayOrderOptions } from "react-razorpay";
 import type { razorpayResponse } from "../types/razorpayResponse";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const PayBtn = ({ planId }: { planId: string }) => {
-    const navigate=useNavigate();
-    const { isLoading, Razorpay } = useRazorpay();
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const { Razorpay } = useRazorpay();
     const verifyOrder = async (data: razorpayResponse) => {
         try {
             await api.post('/order/verify', data);
@@ -20,33 +22,41 @@ const PayBtn = ({ planId }: { planId: string }) => {
     }
 
     const makeOrder = async () => {
-        const res = await api.post(`/order/${planId}`);
-        const order = res.data;
+        try {
+            setIsLoading(true)
+            const res = await api.post(`/order/${planId}`);
+            const order = res.data;
 
-        const options: RazorpayOrderOptions = {
-            key: import.meta.env.VITE_RAZORPAY_KEY,
-            amount: order.amount,
-            currency: "INR",
-            name: "HADI AHMED",
-            description: `Transaction for Plan ${planId}`,
-            order_id: order.order_id,
+            const options: RazorpayOrderOptions = {
+                key: import.meta.env.VITE_RAZORPAY_KEY,
+                amount: order.amount,
+                currency: "INR",
+                name: "HADI AHMED",
+                description: `Transaction for Plan ${planId}`,
+                order_id: order.order_id,
 
-            handler: (response) => {
-                verifyOrder(response)
-                toast.success("Payment Successful!");
-            },
-            prefill: {
-                name: "John Doe",
-                email: "john.doe@example.com",
-                contact: "9999999999",
-            },
-            theme: {
-                color: "#F37254",
-            },
-        };
+                handler: (response) => {
+                    verifyOrder(response)
+                    toast.success("Payment Successful!");
+                },
+                prefill: {
+                    name: "John Doe",
+                    email: "john.doe@example.com",
+                    contact: "9999999999",
+                },
+                theme: {
+                    color: "#F37254",
+                },
+            };
 
-        const razorpayInstance = new Razorpay(options);
-        razorpayInstance.open();
+            const razorpayInstance = new Razorpay(options);
+            razorpayInstance.open();
+        } catch (error) {
+            console.log(error);
+            toast.error("Couldn't order")
+        } finally {
+            setIsLoading(false)
+        }
     };
     return (<Button
         disabled={isLoading}
